@@ -13,6 +13,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home : Scaffold( //scaffold provides basic structure
         backgroundColor: const Color.fromARGB(255, 255, 153, 196), 
+        appBar: AppBar(
+          title: const Text("My First Flutter App"),
+          centerTitle: true,
+          backgroundColor: const Color.fromARGB(255, 62, 123, 255),
+          leading: Icon(Icons.menu),
+          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.logout))],
+        ),
         body: Center(
           child: Container(
             height: 300, 
@@ -25,11 +32,12 @@ class MyApp extends StatelessWidget {
             padding: EdgeInsets.all(25), //padding inside container
             //padding: EdgeInsets.only(top: 20, left: 10), //custom padding)
             
-            child: Column( //column to arrange widgets vertically
+            child: Column( //column to arrange widgets vertically, takes children of widgets
             //only one child allowed in container, so use column for multiple children
               mainAxisAlignment: MainAxisAlignment.center, //center vertically
               crossAxisAlignment: CrossAxisAlignment.center, //center horizontally
               children: [
+                
                 const Text(
                   "Mychaela",
                   style: TextStyle(
