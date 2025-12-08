@@ -11,33 +11,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home : Scaffold( //scaffold provides basic structure
-        backgroundColor: const Color.fromARGB(255, 255, 153, 196), 
+      home: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 153, 196),
         appBar: AppBar(
           title: const Text("My First Flutter App"),
           centerTitle: true,
           backgroundColor: const Color.fromARGB(255, 62, 123, 255),
-          leading: Icon(Icons.menu),
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.logout))],
+          leading: const Icon(Icons.menu),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.logout))
+          ],
         ),
         body: Center(
           child: Container(
-            height: 300, 
             width: 300,
+            height: 400,
+            // We give the container a max height so it doesn't overflow screen
+            // or just let it grow with the child.
             decoration: BoxDecoration(
               color: Colors.white,
-              //curve corners
               borderRadius: BorderRadius.circular(20),
-            ), //cant use color and decoration together
-            padding: EdgeInsets.all(25), //padding inside container
-            //padding: EdgeInsets.only(top: 20, left: 10), //custom padding)
+            ),
+            padding: const EdgeInsets.all(25),
             
-            child: Column( //column to arrange widgets vertically, takes children of widgets
-            //only one child allowed in container, so use column for multiple children
-              mainAxisAlignment: MainAxisAlignment.center, //center vertically
-              crossAxisAlignment: CrossAxisAlignment.center, //center horizontally
+            // FIX 2: Add shrinkWrap so the list only takes up necessary space
+            child: ListView(
+              shrinkWrap: true, 
               children: [
-                
                 const Text(
                   "Mychaela",
                   style: TextStyle(
@@ -51,11 +51,43 @@ class MyApp extends StatelessWidget {
                   color: Color.fromARGB(255, 48, 129, 122),
                   size: 50,
                 ),
+                const Text(
+                  "I am learning Flutter and Dart. Flutter is awesome!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, color: Colors.black54),
+                ),
+                Container(
+                  height: 50, // Reduced from 500 to fit on screen easier
+                  color: Colors.blue,
+                ), 
+                
+                // FIX 1: Removed Expanded. Changed to a fixed Container.
+                Container(
+                  height: 400, 
+                  width: 200, 
+                  color: Colors.pink
+                ),
+                GridView.builder(
+                  shrinkWrap: true, 
+                  physics: const NeverScrollableScrollPhysics(), // Disable GridView scrolling
+                  
+                  itemCount: 64,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 8, // 8 columns
+                  ),
+                  
+                  itemBuilder: (context, index) {
+                    return Container(
+                      color: Colors.green,
+                      margin: const EdgeInsets.all(2),
+                    );
+                  },
+                ),
               ],
             ),
           ),
         ),
-      ), //removes debug banner
+      ),
     );
   }
 }
@@ -121,6 +153,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
+Dynamic typing:
+ListView.builder(
+  itemCount: 10
+  itemBuilder: (context, index) ==> ListTile(
+    title: Text('Item $index'),
+    );
+  },
+);
 
+List names = ["Mitch, "Sharon", "John", "Doe"];
+ListView.builder(
+  itemCount: names.length,
+  itemBuilder: (context, index) ==> ListTile(
+      title: Text(names[index]),
+    );
+  },
+);
 
 */
